@@ -57,3 +57,8 @@ main figure img {
     border: 1px solid black;
     /*zuerst breite, stil, farbe*/
 }
+
+#map {
+    height: 360px;
+    width: 100%;
+}
