@@ -90,3 +90,20 @@ footer {
 .marginleft3 {
     margin-left: 0.3em;
 }
+/*Klasse für die Abstände zwischen Icons und Text*/
+
+@media screen and (max-width: 900px) {
+    main {
+        max-width: 90%;
+    }
+}
+/*regelt die Darstellung der Seite für bildschirme kleiner als 900px*/
+
+@media screen and (max-width: 1280px) {
+    header img.banner {
+        width: 100vw;
+    }
+}
+/*vw viewport width, wenn Bildschirm kleiner als 1280 ist, aendert sich die groesse auf 100 % der möglichen darstellung des screens*/
+
+/**/
