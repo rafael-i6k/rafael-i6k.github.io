@@ -71,6 +71,7 @@ main ul {
 footer .next {
     float: right;
 }
+/*float ermöglicht Text in einer Zeile entweder rechts, mittig oder links zu formatieren; anders als text align*/
 
 footer .back {
     float: left;
@@ -80,3 +81,4 @@ footer {
     padding: 1em 0 3em 0;
     /*em ist der Schriftgrößenabhängige Wert wie groß ein Style dargestellt wird*/
 }
+
