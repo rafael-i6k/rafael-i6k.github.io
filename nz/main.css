@@ -18,8 +18,7 @@ header p {
 
 .white,
 .white a:link,
-.white a:visited
- {
+.white a:visited {
     color: white;
 }
 
@@ -46,7 +45,7 @@ main {
 main p {
     text-align: justify;
     font-family: 'Roboto Condensed', sans-serif;
-/*blocksatz anordnung*/
+    /*blocksatz anordnung*/
 }
 
 main figure {
@@ -72,6 +71,7 @@ main ul {
 footer .next {
     float: right;
 }
+
 /*float ermöglicht Text in einer Zeile entweder rechts, mittig oder links zu formatieren; anders als text align*/
 
 footer .back {
@@ -90,6 +90,7 @@ footer {
 .marginleft3 {
     margin-left: 0.3em;
 }
+
 /*Klasse für die Abstände zwischen Icons und Text*/
 
 @media screen and (max-width: 900px) {
@@ -97,6 +98,7 @@ footer {
         max-width: 90%;
     }
 }
+
 /*regelt die Darstellung der Seite für bildschirme kleiner als 900px*/
 
 @media screen and (max-width: 1280px) {
@@ -104,6 +106,7 @@ footer {
         width: 100vw;
     }
 }
+
 /*vw viewport width, wenn Bildschirm kleiner als 1280 ist, aendert sich die groesse auf 100 % der möglichen darstellung des screens*/
 
 
