@@ -1,5 +1,14 @@
 //-43.883333, 170.516667  south east
 
+let stop = {
+    nr:22,
+    name: "Lake Tekapo",
+    lat: -43.883333,
+    lng: 170.516667,
+    user: "rafael-i6k",
+    wikipedia: "https://en.wikipedia.org/wiki/Lake_Tekapo"
+};
+
 const map = L.map("map", {
     center: [-43.883333, 170.516667],
     zoom: 13,
