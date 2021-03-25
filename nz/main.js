@@ -1,7 +1,7 @@
 //-43.883333, 170.516667  south east
 
 let stop = {
-    nr:22,
+    nr:2,
     name: "Lake Tekapo",
     lat: -43.883333,
     lng: 170.516667,
