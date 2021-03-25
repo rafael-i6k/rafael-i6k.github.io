@@ -7,6 +7,8 @@ const map = L.map("map", {
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
-    // {s} bedeutet server, um traffic auf server von openstreetmap abzuregeln
 });
 console.log(document.querySelector("#map"));
+
+// {s} bedeutet server, um traffic auf server von openstreetmap abzuregeln
+// L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
