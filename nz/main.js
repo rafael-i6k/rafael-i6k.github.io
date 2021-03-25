@@ -26,6 +26,10 @@ ROUTE.sort((stop1, stop2) => {
     return stop1.nr > stop2.nr
 });
 
+/* ROUTE.sort((stop1, stop2) => {
+    return stop1.nr > stop2.nr
+});
+ */
 //sortiert nun nach nummer aufsteigend, kann < ändern < absteigend
 
 for (let entry of ROUTE) {
@@ -36,18 +40,30 @@ for (let entry of ROUTE) {
     
     `;
 
-    let mrk = L.marker([ entry.lat, entry.lng ]).addTo(map);
+    let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
     mrk.bindPopup(`
         <h4>Stop ${entry.nr}: ${entry.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i> <a href="${stop.wikipedia}">Read about stop in Wikipedia</a></p>
 `);
 
     if (entry.nr == 2) {
-        map.setView([ entry.lat, entry.lng], 13)
+        map.setView([entry.lat, entry.lng], 13)
         mrk.openPopup();
     }
 
 }
+
+nav.options.selectedIndex = 2 - 1;
+
+nav.onchange = (evt) => {
+    let selected = evt.target.selectedIndex;
+    let options = evt.target.options;
+    let username =options[selected].value;
+    let link = `https://${username}.github.io/nz/index.html`;
+    console.log(username, link);
+
+    window.location.href = link;
+};
 
 //<option value="rafael-i6k">Lake Tekapo</option>
 
