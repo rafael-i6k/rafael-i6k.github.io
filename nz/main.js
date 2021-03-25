@@ -10,28 +10,41 @@ let stop = {
 };
 
 const map = L.map("map", {
-    center: [stop.lat, stop.lng],
-    zoom: 13,
+    //center: [stop.lat, stop.lng],
+    //zoom: 13,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
 });
 
-console.log(ROUTE);
+let nav = document.querySelector("#navigation");
+console.log(nav);
+
+//console.log(ROUTE);
 for (let entry of ROUTE) {
-    console.log(entry);
+    //console.log(entry);
+
+    nav.innerHTML += `
+        <option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>
+    
+    `;
 
     let mrk = L.marker([ entry.lat, entry.lng ]).addTo(map);
     mrk.bindPopup(`
-    <h4>Stop ${stop.nr}: ${stop.name}</h4>
-    <p><i class="fas fa-external-link-alt mr-3"></i> <a href="${stop.wikipedia}">Read about stop in Wikipedia</a></p>
+        <h4>Stop ${entry.nr}: ${entry.name}</h4>
+        <p><i class="fas fa-external-link-alt mr-3"></i> <a href="${stop.wikipedia}">Read about stop in Wikipedia</a></p>
 `);
+//mrk.bindPopup(`<h4>Stop ${entry.nr}: ${entry.name}<h4>
+//<p><a href="${entry.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
 
     if (entry.nr == 2) {
+        map.setView([ entry.lat, entry.lng], 13)
         mrk.openPopup();
     }
 
 }
+
+//<option value="rafael-i6k">Lake Tekapo</option>
 
 //console.log(document.querySelector("#map"));
 
