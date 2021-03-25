@@ -18,9 +18,9 @@ const map = L.map("map", {
 });
 
 let mrk = L.marker([-43.883333, 170.516667]).addTo(map);
-mrk.bindPopup("Lake Tekapo").openPopup();
+mrk.bindPopup(`<h4>Stop ${stop.nr}: ${stop.name}</h4>`).openPopup();
 
-console.log(document.querySelector("#map"));
+//console.log(document.querySelector("#map"));
 
 // {s} bedeutet server, um traffic auf server von openstreetmap abzuregeln
 // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
