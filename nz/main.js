@@ -21,6 +21,13 @@ let nav = document.querySelector("#navigation");
 console.log(nav);
 
 //console.log(ROUTE);
+
+ROUTE.sort((stop1, stop2) => {
+    return stop1.nr > stop2.nr
+});
+
+//sortiert nun nach nummer aufsteigend, kann < ändern < absteigend
+
 for (let entry of ROUTE) {
     //console.log(entry);
 
@@ -34,8 +41,6 @@ for (let entry of ROUTE) {
         <h4>Stop ${entry.nr}: ${entry.name}</h4>
         <p><i class="fas fa-external-link-alt mr-3"></i> <a href="${stop.wikipedia}">Read about stop in Wikipedia</a></p>
 `);
-//mrk.bindPopup(`<h4>Stop ${entry.nr}: ${entry.name}<h4>
-//<p><a href="${entry.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
 
     if (entry.nr == 2) {
         map.setView([ entry.lat, entry.lng], 13)
