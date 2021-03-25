@@ -10,6 +10,7 @@ const map = L.map("map", {
 });
 
 let mrk = L.marker([-43.883333, 170.516667]).addTo(map);
+mrk.bindPopup("Lake Tekapo").openPopup();
 
 console.log(document.querySelector("#map"));
 
