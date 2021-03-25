@@ -10,7 +10,7 @@ let stop = {
 };
 
 const map = L.map("map", {
-    center: [-43.883333, 170.516667],
+    center: [stop.lat, stop.lng],
     zoom: 13,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
