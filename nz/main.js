@@ -9,7 +9,7 @@ let stop = {
     wikipedia: "https://en.wikipedia.org/wiki/Lake_Tekapo"
 };
 
-const map = L.map("map", {
+const map = L.map("map", {   //L muss gross geschrieben sein um Leaflet accessen zu können
     //center: [stop.lat, stop.lng],
     //zoom: 13,
     layers: [
