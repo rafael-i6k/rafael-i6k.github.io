@@ -33,6 +33,9 @@ layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
 let snowLayer = L.featureGroup();
 layerControl.addOverlay(snowLayer, "Schneehöhen");
 snowLayer.addTo(map);
+let windLayer = L.featureGroup();
+layerControl.addOverlay(windLayer, "Windgeschwindigkeiten");
+windLayer.addTo(map);
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -47,7 +50,9 @@ fetch(awsUrl)
 
                 let formattedDate = new Date(station.properties.date);
 
-                //man muss bei marker die Reihenfolge der Koordinaten ändern, bei marker zuerst länge und dann breite...glaub ich
+                //man muss bei marker die Reihenfolge der Koordinaten ändern, bei Json anders zuerst breite dann länge...glaub ich
+                //grundsätzlich x, y, z, json brauch aber y, x also breite vor länge 
+
                 marker.bindPopup(`
                 <h3>${station.properties.name}</h3>
                 <ul>
@@ -69,9 +74,9 @@ fetch(awsUrl)
                     if (station.properties.HS > 200) {
                         highlightClass = 'snow-200';
                     }
-                    
+
                     let snowIcon = L.divIcon({
-                        html: `<div class="snow-label">${station.properties.HS}</div>`
+                        html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
                     });
                     let snowMarker = L.marker([
                         station.geometry.coordinates[1],
@@ -80,6 +85,27 @@ fetch(awsUrl)
                         icon: snowIcon
                     });
                     snowMarker.addTo(snowLayer);
+                }
+                marker.addTo(awsLayer);
+                if (station.properties.WG) {
+                    let highlightClass = '';
+                    if (station.properties.WG > 3) {
+                        highlightClass = 'wind-3';
+                    }
+                    if (station.properties.WG > 10) {
+                        highlightClass = 'wind-10';
+                    }
+
+                    let windIcon = L.divIcon({
+                        html: `<div class="wind-label ${highlightClass}">${station.properties.WG}</div>`
+                    });
+                    let windMarker = L.marker([
+                        station.geometry.coordinates[1],
+                        station.geometry.coordinates[0]
+                    ], {
+                        icon: windIcon
+                    });
+                    windMarker.addTo(windLayer);
                 }
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
