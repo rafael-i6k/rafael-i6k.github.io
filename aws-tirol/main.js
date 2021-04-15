@@ -26,7 +26,10 @@ let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 let awsLayer = L.featureGroup();
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
-
+awsLayer.addTo(map);
+//bevor Marker hinzugefügt werden, ist der Layer schon aktiv; 
+//Vorteil kann Layer ein und ausschalten
+//2.Vorteil ich kann Ausschnitt suchen, dass alle Marker auf der Karte sind fitbounds
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -39,9 +42,17 @@ fetch(awsUrl)
                 station.geometry.coordinates[0]]
                 );
                 //man muss bei marker die Reihenfolge der Koordinaten ändern, bei marker zuerst länge und dann breite...glaub ich
-                marker.bindPopup(`<h3>${station.properties.name}</h3>`);
-                marker.addTo(map);
+                marker.bindPopup(`
+                <h3>${station.properties.name}</h3>
+                <ul>
+                    <li>Datum: ${station.properties.date}</li>
+                    <li>Temperatur: ${station.properties.LT} C</li>
+                </ul>
+                `);
+                marker.addTo(awsLayer);
         }
+        //set map view to all stations
+        map.fitBounds(awsLayer.getBounds());
 });
 
 
