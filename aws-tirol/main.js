@@ -41,17 +41,25 @@ fetch(awsUrl)
                 station.geometry.coordinates[1], 
                 station.geometry.coordinates[0]]
                 );
+
+                let formattedDate = new Date(station.properties.date);
+
                 //man muss bei marker die Reihenfolge der Koordinaten ändern, bei marker zuerst länge und dann breite...glaub ich
                 marker.bindPopup(`
                 <h3>${station.properties.name}</h3>
                 <ul>
-                    <li>Datum: ${station.properties.date}</li>
+                    <li>Datum: ${formattedDate.toLocaleDateString("de")}</li>
                     <li>Temperatur: ${station.properties.LT} C</li>
+                    <li>Schneehöhe: ${station.properties.HS} cm</li>
+                    <li>Windgeschwindigkeit: ${station.properties.WG || '?'} m/s</li>
+                    <li>Luftfeuchtigkeit: ${station.properties.RH || '?'} %</li>
+                    <li>Höhe Messstation: ${station.geometry.coordinates[2]} m</li>
                 </ul>
+                <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
                 `);
                 marker.addTo(awsLayer);
         }
-        //set map view to all stations
+        //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
         map.fitBounds(awsLayer.getBounds());
 });
 
