@@ -9,3 +9,8 @@ let map = L.map("map", {
         basemapGray
     ]
 });
+
+let layerControl = L.control.layers({
+    'BasemapAT.grau': basemapGray,
+    'BasemapAT.orthofoto': L.tileLayer.provider('BasemapAT.orthofoto'),    
+}) .addTo(map);
