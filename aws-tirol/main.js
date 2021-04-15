@@ -26,10 +26,13 @@ let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 let awsLayer = L.featureGroup();
 layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
-awsLayer.addTo(map);
+//awsLayer.addTo(map);
 //bevor Marker hinzugefügt werden, ist der Layer schon aktiv; 
 //Vorteil kann Layer ein und ausschalten
 //2.Vorteil ich kann Ausschnitt suchen, dass alle Marker auf der Karte sind fitbounds
+let snowLayer = L.featureGroup();
+layerControl.addOverlay(snowLayer, "Schneehöhen");
+snowLayer.addTo(map);
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -58,6 +61,26 @@ fetch(awsUrl)
                 <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
                 `);
                 marker.addTo(awsLayer);
+                if (station.properties.HS) {
+                    let highlightClass = '';
+                    if (station.properties.HS > 100) {
+                        highlightClass = 'snow-100';
+                    }
+                    if (station.properties.HS > 200) {
+                        highlightClass = 'snow-200';
+                    }
+                    
+                    let snowIcon = L.divIcon({
+                        html: `<div class="snow-label">${station.properties.HS}</div>`
+                    });
+                    let snowMarker = L.marker([
+                        station.geometry.coordinates[1],
+                        station.geometry.coordinates[0]
+                    ], {
+                        icon: snowIcon
+                    });
+                    snowMarker.addTo(snowLayer);
+                }
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
         map.fitBounds(awsLayer.getBounds());
