@@ -53,3 +53,24 @@ h2 {
 .wind-10 {
     background-color: green;
 }
+
+.temperature-label {
+    font-size: 1.25em;
+    font-weight: bold;
+    display: inline;
+    padding: 0.3em;
+    border: 1px solid gray;
+    background-color: silver;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        -1px -1px 0 white,  
+}
+
+.negative-temp {
+    background-color: blue;
+}
+.positive-temp {
+    background-color: green;
+}
