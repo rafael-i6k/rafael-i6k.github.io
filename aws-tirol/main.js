@@ -36,6 +36,9 @@ snowLayer.addTo(map);
 let windLayer = L.featureGroup();
 layerControl.addOverlay(windLayer, "Windgeschwindigkeiten");
 windLayer.addTo(map);
+let temperatureLayer = L.featureGroup();
+layerControl.addOverlay(temperatureLayer, "Temperaturen");
+temperatureLayer.addTo(map);
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -107,6 +110,28 @@ fetch(awsUrl)
                     });
                     windMarker.addTo(windLayer);
                 }
+                /*
+                marker.addTo(awsLayer);
+                if (station.properties.LT) {
+                    let highlightTemperatureClass = '';
+                    if (station.properties.LT < 0) {
+                        highlightTemperatureClass = 'negative-temp';
+                    }
+                    if (station.properties.LT > 0) {
+                        highlightTemperatureClass = 'positve-temp';
+                    }
+
+                    let temperatureIcon = L.divIcon({
+                        html: `<div class="temperature-label ${highlightClass}">${station.properties.LT}</div>`
+                    });
+                    let temperatureMarker = L.marker([
+                        station.geometry.coordinates[1],
+                        station.geometry.coordinates[0]
+                    ], {
+                        icon: temperatureIcon
+                    });
+                    temperatureMarker.addTo(temperatureLayer);
+                } */
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
         map.fitBounds(awsLayer.getBounds());
