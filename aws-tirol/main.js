@@ -115,7 +115,7 @@ fetch(awsUrl)
                 if (station.properties.LT) {
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
-                        highlightTemperarureClass = '';
+                        highlightTemperarureClass = 'zero-temp';
                     }
                     if (station.properties.LT < 0) {
                         highlightTemperatureClass = 'negative-temp';
