@@ -110,19 +110,22 @@ fetch(awsUrl)
                     });
                     windMarker.addTo(windLayer);
                 }
-                /*
+                
                 marker.addTo(awsLayer);
                 if (station.properties.LT) {
                     let highlightTemperatureClass = '';
+                    if (station.properties.LT == 0) {
+                        highlightTemperarureClass = '';
+                    }
                     if (station.properties.LT < 0) {
                         highlightTemperatureClass = 'negative-temp';
                     }
                     if (station.properties.LT > 0) {
-                        highlightTemperatureClass = 'positve-temp';
+                        highlightTemperatureClass = 'positive-temp';
                     }
 
                     let temperatureIcon = L.divIcon({
-                        html: `<div class="temperature-label ${highlightClass}">${station.properties.LT}</div>`
+                        html: `<div class="temperature-label ${highlightTemperatureClass}">${station.properties.LT}</div>`
                     });
                     let temperatureMarker = L.marker([
                         station.geometry.coordinates[1],
@@ -131,7 +134,7 @@ fetch(awsUrl)
                         icon: temperatureIcon
                     });
                     temperatureMarker.addTo(temperatureLayer);
-                } */
+                } 
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
         map.fitBounds(awsLayer.getBounds());
