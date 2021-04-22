@@ -66,7 +66,7 @@ let newLabel = (coords, options) => {
     })
     let marker = L.marker([coords[1], coords[0]], {
         icon: label,
-        title: options.station
+        title: `${options.station} (${coords[2]}m)`
     });
     return marker;
 };
