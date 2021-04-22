@@ -112,7 +112,8 @@ fetch(awsUrl)
                 }
                 
                 marker.addTo(awsLayer);
-                if (station.properties.LT) {
+                //if (station.properties.LT) ist truthy, wenn die Temperatur einen Wert hat und nicht undefined ist; mit Zusatz || == 0 gibt es auch LT aus wenn die Temperatur 0 ist. Das heißt im Umkehrschluss, dass, wenn (ohne Zusatz) LT 0 ist, dies das Statement bzw Bedingung als falsy versteht und deswegen keinen Marker für diese Messtation erzeugt
+                if (station.properties.LT || station.properties.LT === 0) {
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
                         highlightTemperarureClass = 'zero-temp';
