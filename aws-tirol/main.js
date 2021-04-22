@@ -43,21 +43,12 @@ overlays.temperature.addTo(map);
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 //https://leafletjs.com/reference-1.7.1.html#featuregroup
-let awsLayer = L.featureGroup();
-layerControl.addOverlay(awsLayer, "Wetterstationen Tirol");
+
 //awsLayer.addTo(map);
 //bevor Marker hinzugefügt werden, ist der Layer schon aktiv; 
 //Vorteil kann Layer ein und ausschalten
 //2.Vorteil ich kann Ausschnitt suchen, dass alle Marker auf der Karte sind fitbounds
-let snowLayer = L.featureGroup();
-layerControl.addOverlay(snowLayer, "Schneehöhen");
-snowLayer.addTo(map);
-let windLayer = L.featureGroup();
-layerControl.addOverlay(windLayer, "Windgeschwindigkeiten");
-windLayer.addTo(map);
-let temperatureLayer = L.featureGroup();
-layerControl.addOverlay(temperatureLayer, "Temperaturen");
-temperatureLayer.addTo(map);
+
 
 fetch(awsUrl)
     .then(response => response.json())
@@ -88,7 +79,7 @@ fetch(awsUrl)
                 </ul>
                 <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
                 `);
-                marker.addTo(overlays.snowheight);
+                marker.addTo(overlays.stations);
                 if (station.properties.HS) {
                     let highlightClass = '';
                     if (station.properties.HS > 100) {
