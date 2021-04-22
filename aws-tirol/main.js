@@ -31,7 +31,11 @@ let layerControl = L.control.layers({
         L.tileLayer.provider('BasemapAT.overlay'),
     ])
 }, {
-    "Wetterstationen Tirol": overlays.stations
+    "Wetterstationen Tirol": overlays.stations,
+    "Temperatur (°C)": overlays.temperature,
+    "Schneehöhe (cm)": overlays.snowheight,
+    "Windgeschwindigkeit (km/h)": overlays.windspeed,
+    "Windrichtung": overlays.winddirection,
 }) .addTo(map);
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
