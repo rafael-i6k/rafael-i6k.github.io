@@ -36,9 +36,15 @@ let layerControl = L.control.layers({
     "Schneehöhe (cm)": overlays.snowheight,
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection,
+}, {collapsed: false, 
 }) .addTo(map);
 overlays.temperature.addTo(map);
 
+let layerScale = L.control.scale({
+    maxwidth: 800,
+    metric: true,
+    imperial: false,
+}) .addTo(map);
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
