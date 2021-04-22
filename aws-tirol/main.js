@@ -47,10 +47,13 @@ let layerScale = L.control.scale({
 }) .addTo(map);
 
 let newLabel = (coords, options) => {
-    console.log("Koordinaten coords: ", coords);
-    console.log("Optionsobjekt:", options);
-    let marker = L.marker([coords[1], coords[0]]);
-    console.log("Marker:", marker);
+    let label = L.divIcon({
+        html: <div>${options.value}</div>,
+        className: "text-label"
+    })
+    let marker = L.marker([coords[1], coords[0]], {
+        icon: label
+    });
     return marker;
 };
 
@@ -146,7 +149,6 @@ fetch(awsUrl)
                         value: station.properties.LT
                     });
                     marker.addTo(overlays.temperature);
-                    marker. addTo(overlays.temperature);
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
                         highlightTemperarureClass = 'zero-temp';
