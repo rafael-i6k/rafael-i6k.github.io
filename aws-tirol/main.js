@@ -46,6 +46,14 @@ let layerScale = L.control.scale({
     imperial: false,
 }) .addTo(map);
 
+let newLabel = (coords, options) => {
+    console.log("Koordinaten coords: ", coords);
+    console.log("Optionsobjekt:", options);
+    let marker = L.marker([coords[1], coords[0]]);
+    console.log("Marker:", marker);
+    return marker;
+};
+
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 //https://leafletjs.com/reference-1.7.1.html#featuregroup
@@ -134,6 +142,11 @@ fetch(awsUrl)
                 //if (station.properties.LT) ist truthy, wenn die Temperatur einen Wert hat und nicht undefined ist; mit Zusatz || == 0 gibt es auch LT aus wenn die Temperatur 0 ist. Das heißt im Umkehrschluss, dass, wenn (ohne Zusatz) LT 0 ist, dies das Statement bzw Bedingung als falsy versteht und deswegen keinen Marker für diese Messtation erzeugt
                 // bessere Lösung ist if(typeof station.properties.LT == "number") solange LT eine number ist, ist die if truthy
                 if (station.properties.LT || station.properties.LT === 0) {
+                    let marker = newLabel(station.geometry.coordinates, {
+                        value: station.properties.LT
+                    });
+                    marker.addTo(overlays.temperature);
+                    marker. addTo(overlays.temperature);
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
                         highlightTemperarureClass = 'zero-temp';
@@ -167,3 +180,6 @@ fetch(awsUrl)
 //https://lawine.tirol.gv.at/data/produkte/ogd.geojson falscher link
 
 //https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson
+
+
+
