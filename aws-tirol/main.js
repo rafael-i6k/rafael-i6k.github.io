@@ -37,6 +37,8 @@ let layerControl = L.control.layers({
     "Windgeschwindigkeit (km/h)": overlays.windspeed,
     "Windrichtung": overlays.winddirection,
 }) .addTo(map);
+overlays.temperature.addTo(map);
+
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
@@ -86,7 +88,7 @@ fetch(awsUrl)
                 </ul>
                 <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
                 `);
-                marker.addTo(awsLayer);
+                marker.addTo(overlays.snowheight);
                 if (station.properties.HS) {
                     let highlightClass = '';
                     if (station.properties.HS > 100) {
@@ -106,9 +108,9 @@ fetch(awsUrl)
                     ], {
                         icon: snowIcon
                     });
-                    snowMarker.addTo(snowLayer);
+                    snowMarker.addTo(overlays.snowheight);
                 }
-                marker.addTo(awsLayer);
+                marker.addTo(overlays.windspeed);
                 if (station.properties.WG) {
                     let highlightClass = '';
                     if (station.properties.WG > 3) {
@@ -128,10 +130,10 @@ fetch(awsUrl)
                     ], {
                         icon: windIcon
                     });
-                    windMarker.addTo(windLayer);
+                    windMarker.addTo(overlays.windspeed);
                 }
                 
-                marker.addTo(awsLayer);
+                marker.addTo(overlays.temperature);
                 //if (station.properties.LT) ist truthy, wenn die Temperatur einen Wert hat und nicht undefined ist; mit Zusatz || == 0 gibt es auch LT aus wenn die Temperatur 0 ist. Das heißt im Umkehrschluss, dass, wenn (ohne Zusatz) LT 0 ist, dies das Statement bzw Bedingung als falsy versteht und deswegen keinen Marker für diese Messtation erzeugt
                 if (station.properties.LT || station.properties.LT === 0) {
                     let highlightTemperatureClass = '';
@@ -154,11 +156,11 @@ fetch(awsUrl)
                     ], {
                         icon: temperatureIcon
                     });
-                    temperatureMarker.addTo(temperatureLayer);
+                    temperatureMarker.addTo(overlays.temperature);
                 } 
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
-        map.fitBounds(awsLayer.getBounds());
+        map.fitBounds(overlays.stations.getBounds());
 });
 
 
