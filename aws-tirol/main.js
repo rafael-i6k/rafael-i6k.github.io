@@ -152,7 +152,7 @@ fetch(awsUrl)
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
                         highlightTemperarureClass = 'zero-temp';
-                    }
+                    }/*
                     if (station.properties.LT < 0) {
                         highlightTemperatureClass = 'negative-temp';
                     }
@@ -169,7 +169,7 @@ fetch(awsUrl)
                     ], {
                         icon: temperatureIcon
                     });
-                    temperatureMarker.addTo(overlays.temperature);
+                    temperatureMarker.addTo(overlays.temperature); */
                 } 
         }
         //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
