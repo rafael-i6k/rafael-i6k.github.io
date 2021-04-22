@@ -46,18 +46,27 @@ let layerScale = L.control.scale({
     imperial: false,
 }) .addTo(map);
 
-let getColor = (value, colorRamp) => {
 
+
+let getColor = (value, colorRamp) => {
+    for (let rule of colorRamp) {
+        // for statement schreibt colorRamp in die Variable rule, danach checkt if die colorramp nach min max in der variable rule && verknüpft Argumente
+        if (value >= rule.min && value < rule.max) {
+            return rule.col;
+        }
+    }
+    return "black";
 };
 
 let newLabel = (coords, options) => {
     let color = getColor(options.value, options.colors)
     let label = L.divIcon({
-        html: `<div>${options.value}</div>`,
+        html: `<div style="background-color:${color}">${options.value}</div>`,
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]], {
-        icon: label
+        icon: label,
+        title: options.station
     });
     return marker;
 };
@@ -76,9 +85,9 @@ let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 fetch(awsUrl)
     .then(response => response.json())
     .then(json => {
-        console.log('Daten konvertiert: ', json);
+      //  console.log('Daten konvertiert: ', json);
         for (station of json.features) {
-            console.log('Station: ', station);
+            //console.log('Station: ', station);
             //https://leafletjs.com/reference-1.7.1.html#marker
             let marker = L.marker([
                 station.geometry.coordinates[1], 
@@ -105,8 +114,9 @@ fetch(awsUrl)
                 marker.addTo(overlays.stations);
                 if (typeof station.properties.HS == "number") {
                     let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.HS,
-                        colors: COLORS.snowheight
+                        value: station.properties.HS.toFixed(0),
+                        colors: COLORS.snowheight,
+                        station: station.properties.name
                     });
                     marker.addTo(overlays.snowheight);
 
@@ -134,8 +144,9 @@ fetch(awsUrl)
                 //marker.addTo(overlays.windspeed);    braucht man nicht glaub ich
                 if (typeof station.properties.WG == "number") {
                     let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.WG,
-                        colors: COLORS.windspeed
+                        value: station.properties.WG.toFixed(0),
+                        colors: COLORS.windspeed,
+                        station: station.properties.name
                     });
                     marker.addTo(overlays.windspeed);
 
@@ -166,8 +177,9 @@ fetch(awsUrl)
                 // bessere Lösung ist if(typeof station.properties.LT == "number") solange LT eine number ist, ist die if truthy
                 if (station.properties.LT || station.properties.LT === 0) {
                     let marker = newLabel(station.geometry.coordinates, {
-                        value: station.properties.LT,
-                        colors: COLORS.temperature
+                        value: station.properties.LT.toFixed(1),
+                        colors: COLORS.temperature,
+                        station: station.properties.name
                     });
                     marker.addTo(overlays.temperature);
                     
