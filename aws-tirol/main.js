@@ -1,4 +1,4 @@
-
+//https://leafletjs.com/reference-1.7.1.html#tilelayer
 let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 
 let map = L.map("map", {
@@ -9,7 +9,7 @@ let map = L.map("map", {
         basemapGray
     ]
 });
-
+//https://leafletjs.com/reference-1.7.1.html#control-layers
 let layerControl = L.control.layers({
     'BasemapAT.grau': basemapGray,
     'BasemapAT.orthofoto': L.tileLayer.provider('BasemapAT.orthofoto'),
