@@ -48,7 +48,7 @@ let layerScale = L.control.scale({
 
 let newLabel = (coords, options) => {
     let label = L.divIcon({
-        html: <div>${options.value}</div>,
+        html: `<div>${options.value}</div>`,
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]], {
@@ -56,6 +56,7 @@ let newLabel = (coords, options) => {
     });
     return marker;
 };
+
 
 let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
@@ -98,6 +99,12 @@ fetch(awsUrl)
                 `);
                 marker.addTo(overlays.stations);
                 if (typeof station.properties.HS == "number") {
+                    let marker = newLabel(station.geometry.coordinates, {
+                        value: station.properties.HS
+                    });
+                    marker.addTo(overlays.snowheight);
+
+                    /*
                     let highlightClass = '';
                     if (station.properties.HS > 100) {
                         highlightClass = 'snow-100';
@@ -116,10 +123,16 @@ fetch(awsUrl)
                     ], {
                         icon: snowIcon
                     });
-                    snowMarker.addTo(overlays.snowheight);
+                    snowMarker.addTo(overlays.snowheight); */
                 }
                 marker.addTo(overlays.windspeed);
                 if (typeof station.properties.WG == "number") {
+                    let marker = newLabel(station.geometry.coordinates, {
+                        value: station.properties.WG
+                    });
+                    marker.addTo(overlays.windspeed);
+
+                    /*
                     let highlightClass = '';
                     if (station.properties.WG > 3) {
                         highlightClass = 'wind-3';
@@ -138,7 +151,7 @@ fetch(awsUrl)
                     ], {
                         icon: windIcon
                     });
-                    windMarker.addTo(overlays.windspeed);
+                    windMarker.addTo(overlays.windspeed); */
                 }
                 
                 marker.addTo(overlays.temperature);
@@ -149,10 +162,11 @@ fetch(awsUrl)
                         value: station.properties.LT
                     });
                     marker.addTo(overlays.temperature);
-                    let highlightTemperatureClass = '';
+                    
+                    /*let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
                         highlightTemperarureClass = 'zero-temp';
-                    }/*
+                    }
                     if (station.properties.LT < 0) {
                         highlightTemperatureClass = 'negative-temp';
                     }
