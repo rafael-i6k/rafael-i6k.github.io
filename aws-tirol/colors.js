@@ -30,6 +30,7 @@ const COLORS = {
     }],
 
     temperature: [{
+        min: -99,
         max: -25,
         col: "#9f80ff" 
     },  {
@@ -78,10 +79,11 @@ const COLORS = {
         col: "#ff1e23"
     }, {
         min: 30,
-        max: 35,
+        max: 99,
         col: "#fa3c96"
     }],
     snowheight: [{
+        min: 0,
         max: 1,
         col: "#fff"
     }, {
@@ -114,6 +116,7 @@ const COLORS = {
         col: "#784bff"
     }, {
         min: 400,
+        max: 99999,
         col: "#cd0feb"
     }],
 };
