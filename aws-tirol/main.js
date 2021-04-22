@@ -86,7 +86,7 @@ fetch(awsUrl)
                 <a target="_blank" href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/tag/${station.properties.plot}.png">Grafik</a>
                 `);
                 marker.addTo(overlays.stations);
-                if (station.properties.HS) {
+                if (typeof station.properties.HS == "number") {
                     let highlightClass = '';
                     if (station.properties.HS > 100) {
                         highlightClass = 'snow-100';
@@ -108,7 +108,7 @@ fetch(awsUrl)
                     snowMarker.addTo(overlays.snowheight);
                 }
                 marker.addTo(overlays.windspeed);
-                if (station.properties.WG) {
+                if (typeof station.properties.WG == "number") {
                     let highlightClass = '';
                     if (station.properties.WG > 3) {
                         highlightClass = 'wind-3';
@@ -132,6 +132,7 @@ fetch(awsUrl)
                 
                 marker.addTo(overlays.temperature);
                 //if (station.properties.LT) ist truthy, wenn die Temperatur einen Wert hat und nicht undefined ist; mit Zusatz || == 0 gibt es auch LT aus wenn die Temperatur 0 ist. Das heißt im Umkehrschluss, dass, wenn (ohne Zusatz) LT 0 ist, dies das Statement bzw Bedingung als falsy versteht und deswegen keinen Marker für diese Messtation erzeugt
+                // bessere Lösung ist if(typeof station.properties.LT == "number") solange LT eine number ist, ist die if truthy
                 if (station.properties.LT || station.properties.LT === 0) {
                     let highlightTemperatureClass = '';
                     if (station.properties.LT == 0) {
