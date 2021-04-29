@@ -55,7 +55,7 @@ let getDirection = (value, directionRamp) => {
         }
     }
     return "unbestimmt";
-};
+};   
 
 let getColor = (value, colorRamp) => {
     for (let rule of colorRamp) {
@@ -70,13 +70,14 @@ let getColor = (value, colorRamp) => {
 let newWindLabel = (coords, options) => {
     let direction = getDirection(options.value, options.direction)
     let label = L.divIcon({
-        html: `<div>${options.direction}</div>`,
+        html: `<div>${direction}</div>`,
         className: "text-label"
     })
     let marker = L.marker([coords[1], coords[0]], {
         icon: label,
         title: `${options.station} (${coords[2]}m)`
     });
+    return marker;
 };
 
 let newLabel = (coords, options) => {
@@ -167,9 +168,10 @@ fetch(awsUrl)
                 });
                 marker.addTo(overlays.humidity);
 
-
             }
-/*
+
+
+            
             if (typeof station.properties.WR == "number") {
                 let marker = newWindLabel(station.geometry.coordinates, {
                     value: station.properties.WR.toFixed(0),
@@ -178,9 +180,8 @@ fetch(awsUrl)
                 });
                 marker.addTo(overlays.winddirection);
 
-
             }
-*/
+
         }
         map.fitBounds(overlays.stations.getBounds());
     });
