@@ -56,7 +56,7 @@ let getDirection = (value, directionRamp) => {
         }
     }
     return "?";
-};   
+};
 
 let getColor = (value, colorRamp) => {
     for (let rule of colorRamp) {
@@ -79,7 +79,7 @@ let newWindLabel = (coords, options) => {
         title: `${options.station} (${coords[2]}m)`
     });
     return marker;
-};  
+};
 
 let newLabel = (coords, options) => {
     let color = getColor(options.value, options.colors)
@@ -172,7 +172,7 @@ fetch(awsUrl)
             }
 
 
-            
+
             if (typeof station.properties.WR == "number") {
                 let marker = newWindLabel(station.geometry.coordinates, {
                     value: station.properties.WR.toFixed(0),
