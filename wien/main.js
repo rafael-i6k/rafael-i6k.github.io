@@ -50,47 +50,73 @@ overlays.pedAreas.addTo(map);
 
 let drawBusStop = (geojsonData) => {
     L.geoJson(geojsonData, {
-        onEachFeature: (feature, layer) => { //https://leafletjs.com/reference-1.7.1.html#geojson 
-            layer.bindPopup(feature.properties.STAT_NAME)
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            Station: ${feature.properties.STAT_NAME}`)
         },
         pointToLayer: (geoJsonPoint, latlng) => {
             return L.marker(latlng, {
                 icon: L.icon({
-                    iconUrl: 'icons/busStop.png',
+                    iconUrl: 'icons/busstop.png',
                     iconSize: [38, 38]
                 })
             })
-        }
+        },
+        attribution: '<a href="https://data.wien.gv.at">Stadt Wien</a>, <a href="https://mapicons.mapsmarker.com">Maps Icons Collection</a>'
     }).addTo(overlays.busStops);
 }
 
-/*
-fetch("data/TOURISTIKHTSVSLOGD.json")
-    .then(response => response.json())
-    .then(stations => {
-        L.geoJson(stations, {
-            onEachFeature: (feature, layer) => {   //https://leafletjs.com/reference-1.7.1.html#geojson 
-                layer.bindPopup(feature.properties.STAT_NAME)
-            },
-            pointToLayer: (geoJsonPoint, latlng) => {
-                return L.marker(latlng, {
-                    icon: L.icon({
-                        iconUrl: 'icons/busStop.png',
-                        iconSize: [38, 38]
-                    })
-                })
+let drawBusLines = (geojsonData) => {
+    console.log('Bus Lines: ', geojsonData);
+    L.geoJson(geojsonData, {
+        style: (feature) => {
+            let col = COLORS.buslines[feature.properties.LINE_NAME];
+            return {
+                color: col
             }
-        }).addTo(map);
-    })  */
+        },
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>${feature.properties.LINE_NAME}</strong>
+            <hr>
+            von ${feature.properties.FROM_NAME}<br>
+            nach ${feature.properties.TO_NAME}`)
+        }
+    }).addTo(overlays.busLines);
+}
 
-for (let config of OGDWIEN) { //Schleife über OGDWien, um auszugeben was da drin steht
-    console.log("Config: ", config.data);
+let drawPedestrianAreas = (geojsonData) => {
+    console.log('Zone: ', geojsonData);
+    L.geoJson(geojsonData, {
+        style: (feature) => {
+            return {
+                stroke: true,
+                fillColor: "yellow",
+            }
+        },
+        onEachFeature: (feature, layer) => {
+            layer.bindPopup(`<strong>Fußgängerzone ${feature.properties.ADRESSE}</strong>
+            <hr>
+            ${feature.properties.ZEITRAUM} <br>
+            ${feature.properties.AUSN_TEXT}
+            `);
+        }
+    }).addTo(overlays.pedAreas);
+}
+
+
+for (let config of OGDWIEN) {
+    // console.log("Config: ", config.data);
     fetch(config.data)
-        .then(response => response.json()) //konvertieren von den Daten, die kommen, in json Format, damit function startet --> ()
+        .then(response => response.json())
         .then(geojsonData => {
-            console.log("Data: ", geojsonData);
+            // console.log("Data: ", geojsonData);
             if (config.title == "Haltestellen Vienna Sightseeing") {
                 drawBusStop(geojsonData);
+            } else if (config.title == "Liniennetz Vienna Sightseeing") {
+                drawBusLines(geojsonData);
+            } else if (config.title === "Fußgängerzonen") {
+                drawPedestrianAreas(geojsonData);
             }
         })
-} // pushen wieder möglich?
+}
