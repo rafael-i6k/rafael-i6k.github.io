@@ -78,7 +78,7 @@ let newWindLabel = (coords, options) => {
         title: `${options.station} (${coords[2]}m)`
     });
     return marker;
-};
+};  
 
 let newLabel = (coords, options) => {
     let color = getColor(options.value, options.colors)
