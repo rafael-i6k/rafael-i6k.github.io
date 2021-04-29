@@ -93,4 +93,4 @@ for (let config of OGDWIEN) { //Schleife über OGDWien, um auszugeben was da dri
                 drawBusStop(geojsonData);
             }
         })
-}
+} // pushen wieder möglich?
