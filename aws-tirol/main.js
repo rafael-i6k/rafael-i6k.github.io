@@ -48,8 +48,8 @@ let layerScale = L.control.scale({
     imperial: false,
 }).addTo(map);
 
-let getDirection = (value, direction) => {
-    for (let rule of direction) {
+let getDirection = (value, directionRamp) => {
+    for (let rule of directionRamp) {
         if (value >= rule.min && value < rule.max) {
             return rule.dir;
         }
@@ -161,7 +161,7 @@ fetch(awsUrl)
             if (typeof station.properties.WR == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.WR.toFixed(0),
-                    colors: DIRECTIONS,
+                    direction: DIRECTIONS,
                     station: station.properties.name
                 });
                 marker.addTo(overlays.winddirection);
