@@ -17,7 +17,8 @@ let baselayers = {
 let overlays = {
     busLines: L.featureGroup(),
     busStops: L.featureGroup(),
-    pedAreas: L.featureGroup()
+    pedAreas: L.featureGroup(),
+    sights: L.featureGroup(),
 };
 
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
@@ -124,7 +125,7 @@ let drawSights = (geojsonData) => {
             })
         },
     }).addTo(overlays.sights);
-}
+}  
 
 for (let config of OGDWIEN) {
     // console.log("Config: ", config.data);
