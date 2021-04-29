@@ -48,7 +48,13 @@ let layerScale = L.control.scale({
     imperial: false,
 }).addTo(map);
 
-
+let getDirection = (value, direction) => {
+    for (let rule of direction) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.dir;
+        }
+    }
+};
 
 let getColor = (value, colorRamp) => {
     for (let rule of colorRamp) {
