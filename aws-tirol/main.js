@@ -47,6 +47,19 @@ let layerScale = L.control.scale({
     metric: true,
     imperial: false,
 }).addTo(map);
+/*
+let rainviewer = L.Control.Rainviewer({ 
+    position: 'bottomleft',
+    nextButtonText: '>',
+    playStopButtonText: 'Play/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Hour:",
+    opacitySliderLabelText: "Opacity:",
+    animationInterval: 500,
+    opacity: 0.5
+}).addTo(map);
+*/
+
 
 let getDirection = (value, directionRamp) => {
     for (let rule of directionRamp) {
