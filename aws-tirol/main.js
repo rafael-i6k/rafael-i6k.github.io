@@ -15,6 +15,7 @@ let overlays = {
     snowheight: L.featureGroup(),
     windspeed: L.featureGroup(),
     winddirection: L.featureGroup(),
+    humidity: L.featureGroup(),
 };
 
 //https://leafletjs.com/reference-1.7.1.html#control-layers
@@ -137,6 +138,18 @@ fetch(awsUrl)
 
 
             }
+
+            if (typeof station.properties.RH == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.RH.toFixed(1),
+                    colors: COLORS.humidity,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.humidity);
+
+
+            }
+
         }
         map.fitBounds(overlays.stations.getBounds());
     });
