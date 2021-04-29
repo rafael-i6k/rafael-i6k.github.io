@@ -54,6 +54,7 @@ let getDirection = (value, direction) => {
             return rule.dir;
         }
     }
+    return "unbestimmt";
 };
 
 let getColor = (value, colorRamp) => {
@@ -137,7 +138,7 @@ fetch(awsUrl)
 
             if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.LT.toFixed(1),
+                    value: station.properties.LT.toFixed(0),
                     colors: COLORS.temperature,
                     station: station.properties.name
                 });
@@ -148,11 +149,22 @@ fetch(awsUrl)
 
             if (typeof station.properties.RH == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
-                    value: station.properties.RH.toFixed(1),
+                    value: station.properties.RH.toFixed(0),
                     colors: COLORS.humidity,
                     station: station.properties.name
                 });
                 marker.addTo(overlays.humidity);
+
+
+            }
+
+            if (typeof station.properties.WR == "number") {
+                let marker = newLabel(station.geometry.coordinates, {
+                    value: station.properties.WR.toFixed(0),
+                    colors: DIRECTIONS,
+                    station: station.properties.name
+                });
+                marker.addTo(overlays.winddirection);
 
 
             }
