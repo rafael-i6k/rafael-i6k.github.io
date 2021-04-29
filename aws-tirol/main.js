@@ -127,7 +127,7 @@ fetch(awsUrl)
 
             }
 
-            if (station.properties.LT || station.properties.LT === 0) {
+            if (typeof station.properties.LT == "number") {
                 let marker = newLabel(station.geometry.coordinates, {
                     value: station.properties.LT.toFixed(1),
                     colors: COLORS.temperature,
