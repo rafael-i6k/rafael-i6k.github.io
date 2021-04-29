@@ -4,7 +4,6 @@ let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 let map = L.map("map", {
     center: [47, 11],
     zoom: 9,
-    // legt Mitte der Karte und den Zoom fest, liegt im Ötztal
     layers: [
         basemapGray
     ]
@@ -76,10 +75,6 @@ let awsUrl = 'https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson';
 
 //https://leafletjs.com/reference-1.7.1.html#featuregroup
 
-//awsLayer.addTo(map);
-//bevor Marker hinzugefügt werden, ist der Layer schon aktiv; 
-//Vorteil kann Layer ein und ausschalten
-//2.Vorteil ich kann Ausschnitt suchen, dass alle Marker auf der Karte sind fitbounds
 
 
 fetch(awsUrl)
@@ -96,8 +91,6 @@ fetch(awsUrl)
 
                 let formattedDate = new Date(station.properties.date);
 
-                //man muss bei marker die Reihenfolge der Koordinaten ändern, bei Json anders zuerst breite dann länge...glaub ich
-                //grundsätzlich x, y, z, json brauch aber y, x also breite vor länge 
 
                 marker.bindPopup(`
                 <h3>${station.properties.name}</h3>
@@ -120,28 +113,8 @@ fetch(awsUrl)
                     });
                     marker.addTo(overlays.snowheight);
 
-                    /*
-                    let highlightClass = '';
-                    if (station.properties.HS > 100) {
-                        highlightClass = 'snow-100';
-                    }
-                    if (station.properties.HS > 200) {
-                        highlightClass = 'snow-200';
-                    }
-                    //https://leafletjs.com/reference-1.7.1.html#divicon
-                    let snowIcon = L.divIcon({
-                        html: `<div class="snow-label ${highlightClass}">${station.properties.HS}</div>`
-                    });
-                    //https://leafletjs.com/reference-1.7.1.html#marker
-                    let snowMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: snowIcon
-                    });
-                    snowMarker.addTo(overlays.snowheight); */
+                    
                 }
-                //marker.addTo(overlays.windspeed);    braucht man nicht glaub ich
                 if (typeof station.properties.WG == "number") {
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.WG.toFixed(0),
@@ -150,31 +123,9 @@ fetch(awsUrl)
                     });
                     marker.addTo(overlays.windspeed);
 
-                    /*
-                    let highlightClass = '';
-                    if (station.properties.WG > 3) {
-                        highlightClass = 'wind-3';
-                    }
-                    if (station.properties.WG > 10) {
-                        highlightClass = 'wind-10';
-                    }
-                    //https://leafletjs.com/reference-1.7.1.html#divicon
-                    let windIcon = L.divIcon({
-                        html: `<div class="wind-label ${highlightClass}">${station.properties.WG}</div>`
-                    });
-                    //https://leafletjs.com/reference-1.7.1.html#marker
-                    let windMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: windIcon
-                    });
-                    windMarker.addTo(overlays.windspeed); */
+
                 }
                 
-                //marker.addTo(overlays.temperature); braucht man nicht weil man eh die label hat
-                //if (station.properties.LT) ist truthy, wenn die Temperatur einen Wert hat und nicht undefined ist; mit Zusatz || == 0 gibt es auch LT aus wenn die Temperatur 0 ist. Das heißt im Umkehrschluss, dass, wenn (ohne Zusatz) LT 0 ist, dies das Statement bzw Bedingung als falsy versteht und deswegen keinen Marker für diese Messtation erzeugt
-                // bessere Lösung ist if(typeof station.properties.LT == "number") solange LT eine number ist, ist die if truthy
                 if (station.properties.LT || station.properties.LT === 0) {
                     let marker = newLabel(station.geometry.coordinates, {
                         value: station.properties.LT.toFixed(1),
@@ -183,30 +134,9 @@ fetch(awsUrl)
                     });
                     marker.addTo(overlays.temperature);
                     
-                    /*let highlightTemperatureClass = '';
-                    if (station.properties.LT == 0) {
-                        highlightTemperarureClass = 'zero-temp';
-                    }
-                    if (station.properties.LT < 0) {
-                        highlightTemperatureClass = 'negative-temp';
-                    }
-                    if (station.properties.LT > 0) {
-                        highlightTemperatureClass = 'positive-temp';
-                    }
-                    //https://leafletjs.com/reference-1.7.1.html#divicon
-                    let temperatureIcon = L.divIcon({
-                        html: `<div class="temperature-label ${highlightTemperatureClass}">${station.properties.LT}</div>`
-                    });
-                    let temperatureMarker = L.marker([
-                        station.geometry.coordinates[1],
-                        station.geometry.coordinates[0]
-                    ], {
-                        icon: temperatureIcon
-                    });
-                    temperatureMarker.addTo(overlays.temperature); */
+
                 } 
         }
-        //set map view to all stations; ------ Erweiterung "DE" bewirkt deutsches Datumsformat
         map.fitBounds(overlays.stations.getBounds());
 });
 
