@@ -59,7 +59,7 @@ let rainviewer = L.Control.Rainviewer({
     opacity: 0.5
 }).addTo(map);
 */
-
+//vergessen zu pushen
 
 let getDirection = (value, directionRamp) => {
     for (let rule of directionRamp) {
