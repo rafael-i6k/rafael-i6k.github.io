@@ -55,7 +55,7 @@ let getDirection = (value, directionRamp) => {
             return rule.dir;
         }
     }
-    return "unbestimmt";
+    return "?";
 };   
 
 let getColor = (value, colorRamp) => {
@@ -186,8 +186,8 @@ fetch(awsUrl)
         }
         map.fitBounds(overlays.stations.getBounds());
     });
-    
-    L.control.rainviewer().addTo(map);
+
+L.control.rainviewer().addTo(map);
 
 //fetch holt daten von URL, nach dem Daten geholt wurden führt then eine nächste funktion aus
 //man muss abwarten was von der Leitung kommt, dies ist die Response, 
