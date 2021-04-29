@@ -91,7 +91,9 @@ let drawPedestrianAreas = (geojsonData) => {
         style: (feature) => {
             return {
                 stroke: true,
+                color: "silver",
                 fillColor: "yellow",
+                fillOpacity: 0.3
             }
         },
         onEachFeature: (feature, layer) => {
