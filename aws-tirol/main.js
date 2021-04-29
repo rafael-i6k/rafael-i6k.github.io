@@ -47,19 +47,7 @@ let layerScale = L.control.scale({
     metric: true,
     imperial: false,
 }).addTo(map);
-/*
-let rainviewer = L.Control.Rainviewer({ 
-    position: 'bottomleft',
-    nextButtonText: '>',
-    playStopButtonText: 'Play/Stop',
-    prevButtonText: '<',
-    positionSliderLabelText: "Hour:",
-    opacitySliderLabelText: "Opacity:",
-    animationInterval: 500,
-    opacity: 0.5
-}).addTo(map);
-*/
-//vergessen zu pushen
+
 
 let getDirection = (value, directionRamp) => {
     for (let rule of directionRamp) {
@@ -198,7 +186,8 @@ fetch(awsUrl)
         }
         map.fitBounds(overlays.stations.getBounds());
     });
-
+    
+    L.control.rainviewer().addTo(map);
 
 //fetch holt daten von URL, nach dem Daten geholt wurden führt then eine nächste funktion aus
 //man muss abwarten was von der Leitung kommt, dies ist die Response, 
