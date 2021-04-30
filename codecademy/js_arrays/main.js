@@ -1,5 +1,4 @@
-const chores = ['wash dishes', 'do laundry', 'take out trash'];
+const chores = ['wash dishes', 'do laundry', 'take out trash', 'cook dinner', 'mop floor'];
 
-
-chores.push('vacuum cleaning', 'cleaning windows');
+chores.pop();
 console.log(chores);
