@@ -1,3 +1,9 @@
-let groceryList = ['bread', 'tomatoes', 'milk'];
+let condiments = ['Ketchup', 'Mustard', 'Soy Sauce', 'Sriracha'];
+condiments[0] = 'Mayo';
+console.log(condiments);
+condiments = ['Mayo'];
+console.log(condiments);
 
-groceryList[1] = 'avocados';
+const utensils = ['Fork', 'Knife', 'Chopsticks', 'Spork'];
+utensils[3] = 'Spoon';
+console.log(utensils);
