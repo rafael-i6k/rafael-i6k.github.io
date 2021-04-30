@@ -1,6 +1,3 @@
-const famousSayings = ['Fortune favors the brave.', 'A joke is a very serious thing.', 'Where there is love there is life.'];
+let groceryList = ['bread', 'tomatoes', 'milk'];
 
-var listItem = famousSayings[0];
-console.log(listItem);
-console.log(famousSayings[2]);
-console.log(famousSayings[3]);
+groceryList[1] = 'avocados';
