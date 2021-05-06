@@ -156,4 +156,10 @@ for (let config of OGDWIEN) {
 }
 // leaflet hash
 var hash = new L.Hash(map);
+L.control.reachability({
+    // add settings/options here
+    apiKey: '5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204'
+}).addTo(map);
 
+// token key
+// 5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204
