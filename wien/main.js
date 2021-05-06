@@ -36,8 +36,7 @@ let map = L.map("map", {
 var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.basemap"), {
     toggleDisplay: true,
     minimized: false,
-}
-).addTo(map);
+}).addTo(map);
 
 // Kartenhintergründe und Overlays zur Layer-Control hinzufügen
 let layerControl = L.control.layers({
@@ -135,7 +134,7 @@ let drawSights = (geojsonData) => {
             })
         },
     }).addTo(overlays.sights);
-}  
+}
 
 for (let config of OGDWIEN) {
     // console.log("Config: ", config.data);
@@ -158,7 +157,23 @@ for (let config of OGDWIEN) {
 var hash = new L.Hash(map);
 L.control.reachability({
     // add settings/options here
-    apiKey: '5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204'
+    apiKey: '5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204',
+    drawButtonContent: '',
+    drawButtonStyleClass: 'fa fa-pencil',
+    deleteButtonContent: '',
+    deleteButtonStyleClass: 'fa fa-trash',
+    distanceButtonContent: '',
+    distanceButtonStyleClass: 'fa fa-road',
+    timeButtonContent: '',
+    timeButtonStyleClass: 'fa fa-clock-o',
+    travelModeButton1Content: '',
+    travelModeButton1StyleClass: 'fa fa-car',
+    travelModeButton2Content: '',
+    travelModeButton2StyleClass: 'fa fa-bicycle',
+    travelModeButton3Content: '',
+    travelModeButton3StyleClass: 'fa fa-male',
+    travelModeButton4Content: '',
+    travelModeButton4StyleClass: 'fa fa-wheelchair-alt'
 }).addTo(map);
 
 // token key
