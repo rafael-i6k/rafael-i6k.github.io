@@ -79,7 +79,7 @@ let drawBusStop = (geojsonData) => {
 }
 
 let drawBusLines = (geojsonData) => {
-    console.log('Bus Lines: ', geojsonData);
+   // console.log('Bus Lines: ', geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => {
             let col = COLORS.buslines[feature.properties.LINE_NAME];
@@ -97,7 +97,7 @@ let drawBusLines = (geojsonData) => {
 }
 
 let drawPedestrianAreas = (geojsonData) => {
-    console.log('Zone: ', geojsonData);
+    //console.log('Zone: ', geojsonData);
     L.geoJson(geojsonData, {
         style: (feature) => {
             return {
@@ -118,7 +118,7 @@ let drawPedestrianAreas = (geojsonData) => {
 }
 
 let drawSights = (geojsonData) => {
-    console.log('Sehenswuerdigkeit: ', geojsonData);
+    //console.log('Sehenswuerdigkeit: ', geojsonData);
     L.geoJson(geojsonData, {
         onEachFeature: (feature, layer) => {
             layer.bindPopup(`<strong>${feature.properties.NAME}</strong>
@@ -155,9 +155,25 @@ for (let config of OGDWIEN) {
 }
 // leaflet hash
 var hash = new L.Hash(map);
+
+let styleIntervals = (feature) => {
+    //console.log(feature.properties);
+    //console.log(feature.properties.Measure);
+    let color  = "";
+    let range = feature.properties.Range;
+    if (feature.properties.Measure === "time") {
+        color = COLORS.minutes[range];
+    } else if (feature.properties.Measure === "distance") {
+        color = COLORS.kilometers[range];
+    } else {
+        color = "black";
+    }
+};
+
 L.control.reachability({
     // add settings/options here
     apiKey: '5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204',
+    styleFn: styleIntervals,
     drawButtonContent: '',
     drawButtonStyleClass: 'fa fa-pencil-alt fa-2x', //falsch
     deleteButtonContent: '',
