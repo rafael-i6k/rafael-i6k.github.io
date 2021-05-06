@@ -13,6 +13,7 @@ let baselayers = {
     ]),
 };
 
+
 // Overlays für die Themen zum Ein- und Ausschalten definieren
 let overlays = {
     busLines: L.featureGroup(),
@@ -30,6 +31,9 @@ let map = L.map("map", {
         baselayers.grau
     ]
 });
+
+// minimap
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.basemap")).addTo(map);
 
 // Kartenhintergründe und Overlays zur Layer-Control hinzufügen
 let layerControl = L.control.layers({
@@ -149,5 +153,3 @@ for (let config of OGDWIEN) {
 // leaflet hash
 var hash = new L.Hash(map);
 
-// minimap
-var miniMap = new L.Control.MiniMap("BasemapAT.grau").addTo(map);
