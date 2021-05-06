@@ -148,3 +148,6 @@ for (let config of OGDWIEN) {
 }
 // leaflet hash
 var hash = new L.Hash(map);
+
+// minimap
+var miniMap = new L.Control.MiniMap("BasemapAT.grau").addTo(map);
