@@ -32,11 +32,12 @@ let map = L.map("map", {
     ]
 });
 
-// minimap
+// minimap, muss nach Initialisierung der Karte kommen, da sonst addTo(map) den Code abstürzt
 var miniMap = new L.Control.MiniMap(L.tileLayer.provider("BasemapAT.basemap"), {
     toggleDisplay: true,
     minimized: false,
 }).addTo(map);
+
 
 // Kartenhintergründe und Overlays zur Layer-Control hinzufügen
 let layerControl = L.control.layers({
@@ -176,7 +177,7 @@ let styleIntervals = (feature) => {
 };
 
 L.control.reachability({
-    // add settings/options here
+    // add settings/options here; -2x doppelte Groesse des Icons
     apiKey: '5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204',
     styleFn: styleIntervals,
     drawButtonContent: '',
@@ -197,5 +198,6 @@ L.control.reachability({
     travelModeButton4StyleClass: 'fas fa-wheelchair fa-2x' //falsch
 }).addTo(map);
 
+//
 // token key
 // 5b3ce3597851110001cf6248e7ba00d651304c2ca3bf9931047a8204
