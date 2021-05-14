@@ -12,6 +12,7 @@ let stop = {
 const map = L.map("map", { //L muss gross geschrieben sein um Leaflet accessen zu können
     //center: [stop.lat, stop.lng],
     //zoom: 13,
+    fullscreenControl: true,
     layers: [
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
     ]
