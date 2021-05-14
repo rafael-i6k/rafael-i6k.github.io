@@ -9,7 +9,7 @@ let stop = {
     wikipedia: "https://en.wikipedia.org/wiki/Lake_Tekapo"
 };
 
-const map = L.map("map", {   //L muss gross geschrieben sein um Leaflet accessen zu können
+const map = L.map("map", { //L muss gross geschrieben sein um Leaflet accessen zu können
     //center: [stop.lat, stop.lng],
     //zoom: 13,
     layers: [
@@ -35,15 +35,13 @@ ROUTE.sort((stop1, stop2) => {
 for (let entry of ROUTE) {
     //console.log(entry);
 
-    nav.innerHTML += `
-        <option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>
-    
-    `;
+    nav.innerHTML += `<option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>`;
+    // nav.innerHTML += `<option value="${entry.user}">Stop ${entry.nr}: ${entry.name}</option>`;
 
     let mrk = L.marker([entry.lat, entry.lng]).addTo(map);
     mrk.bindPopup(`
         <h4>Stop ${entry.nr}: ${entry.name}</h4>
-        <p><i class="fas fa-external-link-alt mr-3"></i> <a href="${stop.wikipedia}">Read about stop in Wikipedia</a></p>
+        <p><a href="${entry.wikipedia}"><i class="fas fa-external-link-alt mr-3"></i>Read about stop in Wikipedia</a></p>
 `);
 
     if (entry.nr == 2) {
@@ -58,7 +56,7 @@ nav.options.selectedIndex = 2 - 1;
 nav.onchange = (evt) => {
     let selected = evt.target.selectedIndex;
     let options = evt.target.options;
-    let username =options[selected].value;
+    let username = options[selected].value;
     let link = `https://${username}.github.io/nz/index.html`;
     console.log(username, link);
 
