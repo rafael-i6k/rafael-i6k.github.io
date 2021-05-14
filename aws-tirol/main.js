@@ -2,6 +2,7 @@
 let basemapGray = L.tileLayer.provider('BasemapAT.grau');
 //https://leafletjs.com/reference-1.7.1.html#map-example
 let map = L.map("map", {
+    fullscreenControl: true,
     center: [47, 11],
     zoom: 9,
     layers: [
@@ -194,3 +195,8 @@ L.control.rainviewer().addTo(map);
 //https://lawine.tirol.gv.at/data/produkte/ogd.geojson falscher link
 
 //https://wiski.tirol.gv.at/lawine/produkte/ogd.geojson
+
+var miniMap = new L.Control.MiniMap(L.tileLayer.provider('BasemapAT.grau'), {
+    toggleDisplay: true,
+    minimized: false,
+}).addTo(map);
