@@ -45,7 +45,7 @@ for (let entry of ROUTE) {
 `);
 
     if (entry.nr == 2) {
-        map.setView([entry.lat, entry.lng], 13)
+        map.setView([entry.lat, entry.lng], 12)
         mrk.openPopup();
     }
 
@@ -69,3 +69,11 @@ nav.onchange = (evt) => {
 
 // {s} bedeutet server, um traffic auf server von openstreetmap abzuregeln
 // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+
+
+//https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+
+var miniMap = new L.Control.MiniMap(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"), {
+    toggleDisplay: true,
+    minimized: false,
+}).addTo(map);
