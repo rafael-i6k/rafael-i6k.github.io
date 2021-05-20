@@ -49,7 +49,9 @@ const controlElevation = L.control.elevation({
 }).addTo(map);
 
 const drawTrack = (nr) => {
-    console.log('Track: ', nr);
+    //console.log('Track: ', nr);
+    controlElevation.clear();
+    overlays.tracks.clearLayers();
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //wartet bis plugin vollständig geladen ist; bei Laden über Server
         marker_options: {
@@ -83,10 +85,10 @@ const drawTrack = (nr) => {
 const selectedTrack = 19;
 drawTrack(selectedTrack);
 
-console.log('biketirol json: ', BIKETIROL);
+//console.log('biketirol json: ', BIKETIROL);
 
 let pulldown = document.querySelector("#pulldown");
-console.log('Pulldown: ', pulldown);
+//console.log('Pulldown: ', pulldown);
 let selected = '';  //leere Variable definieren bei option einfügen
 for (let track of BIKETIROL) {
     if(selectedTrack == track.nr) {
@@ -97,3 +99,7 @@ for (let track of BIKETIROL) {
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
 
+pulldown.onchange = () => {
+    //console.log('changed!!!!!', pulldown.value); // schreibt Wert der Änderung in Console
+    drawTrack(pulldown.value);
+}
