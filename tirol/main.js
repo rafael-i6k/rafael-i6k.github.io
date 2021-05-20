@@ -42,6 +42,11 @@ let layerControl = L.control.layers({
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 
+const controlElevation = L.control.elevation({
+    elevationDiv:"#profile",
+    followMarker: false,
+    theme: 'lime-theme',
+}).addTo(map);
 
 const drawTrack = (nr) => {
     console.log('Track: ', nr);
@@ -72,7 +77,7 @@ const drawTrack = (nr) => {
         `);
        
     });
-
+    controlElevation.load(`tracks/${nr}.gpx`);
 };
 
 const selectedTrack = 19;
