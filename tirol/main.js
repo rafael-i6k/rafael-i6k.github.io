@@ -87,7 +87,13 @@ console.log('biketirol json: ', BIKETIROL);
 
 let pulldown = document.querySelector("#pulldown");
 console.log('Pulldown: ', pulldown);
+let selected = '';  //leere Variable definieren bei option einfügen
 for (let track of BIKETIROL) {
-    //console.log(track);
-    pulldown.innerHTML += `<option value = "${track.nr}">${track.nr}: ${track.etappe}</option>`;
+    if(selectedTrack == track.nr) {
+        selected = 'selected';
+    } else {
+        selected = '';
+    }   
+    pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
+
