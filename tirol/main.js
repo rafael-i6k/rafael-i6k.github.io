@@ -48,10 +48,17 @@ const controlElevation = L.control.elevation({
     theme: 'lime-theme',
 }).addTo(map);
 
+let activeElevationTrack;
+
+
 const drawTrack = (nr) => {
     //console.log('Track: ', nr);
     controlElevation.clear();
     overlays.tracks.clearLayers();
+    if(activeElevationTrack){
+      activeElevationTrack.removeFrom(map);
+    }
+ 
     let gpxTrack = new L.GPX(`tracks/${nr}.gpx`, {
         async: true, //wartet bis plugin vollständig geladen ist; bei Laden über Server
         marker_options: {
@@ -80,6 +87,11 @@ const drawTrack = (nr) => {
        
     });
     controlElevation.load(`tracks/${nr}.gpx`);
+    controlElevation.on("eledata_loaded", (evt) => {
+        activeElevationTrack = evt.layer;
+        //console.log('ele data: ', activeElevationTrack);
+        //console.log('elecontr', controlElevation);
+    })
 };
 
 const selectedTrack = 19;
