@@ -185,8 +185,14 @@ for (let track of BIKETIROL) {
     }   
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
-
+//Eventhandler fuer Aenderung des Dropdown
 pulldown.onchange = () => {
     //console.log('changed!!!!!', pulldown.value); // schreibt Wert der Änderung in Console
     drawTrack(pulldown.value);
 }
+
+
+map.on("zoomend moveend", () => {
+    //Wikipedia Artikel zeichnen
+    drawWikipedia(map.getBounds());
+});
