@@ -196,6 +196,7 @@ const updateTexts = (nr) => {
                 //gibt es ein Element in HTML 
                 if (document.querySelector(`#${key}`)) {
                     console.log("Juhu", key, etappe[key]);
+                    document.querySelector(`#${key}`).innerHTML = etappe[key];
                 }
             }
         }
