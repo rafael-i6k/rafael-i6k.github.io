@@ -41,6 +41,19 @@ let layerControl = L.control.layers({
     "Wikipedia-Artikel": overlays.wikipedia
 }).addTo(map);
 
+// Wikipedia Artikel Zeichnen 
+const drawWikipedia = (bounds) => {
+    console.log(bounds);
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=rafaelibk&lang=de`;
+    console.log(url);
+}
+
+fetch(url).then(
+    response => response.JSON()
+).then(jsonData => {
+    console.log(jsonData);
+});
+ 
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
 overlays.wikipedia.addTo(map);
@@ -87,6 +100,9 @@ const drawTrack = (nr) => {
                     <li>Höhenmeter bergab: ${gpxTrack.get_elevation_loss()} m</li>
                 </ul>
         `);
+
+        //Wikipedia Artikel 
+        drawWikipedia(gpxTrack.getBounds());
        
     });
     controlElevation.load(`tracks/${nr}.gpx`);
