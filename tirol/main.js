@@ -44,15 +44,30 @@ let layerControl = L.control.layers({
 // Wikipedia Artikel Zeichnen 
 const drawWikipedia = (bounds) => {
     console.log(bounds);
-    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=rafaelibk&lang=de`;
-    console.log(url);
-}
+    let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=rafaelibk&lang=de&maxRows=30`;
+
+    //URL bei geonames.org aufrufen und JSO Daten abholen
 
 fetch(url).then(
-    response => response.JSON()
+    response => response.json()
 ).then(jsonData => {
     console.log(jsonData);
+
+    for (let article of jsonData.geonames) {
+        let mrk = L.marker([article.lat, article.lng]);
+        mrk.addTo(overlays.wikipedia);
+
+        let img = "";
+        if (article.thumbnailImg) {
+            img = `<img src="${article.thumbnailImg}"
+            alt="thumbnail">`;
+        }
+
+    }
 });
+};
+
+
  
 // Overlay mit GPX-Track anzeigen
 overlays.tracks.addTo(map);
