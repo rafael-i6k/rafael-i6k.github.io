@@ -46,7 +46,7 @@ let layerControl = L.control.layers({
 // Wikipedia Artikel Zeichnen 
 let articleDrawn = {};
 const drawWikipedia = (bounds) => {
-    console.log(bounds);
+    //console.log(bounds);
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=rafaelibk&lang=de&maxRows=30`;
     console.log(url);
 
@@ -70,13 +70,13 @@ const drawWikipedia = (bounds) => {
     fetch(url).then(
         response => response.json()
     ).then(jsonData => {
-        console.log(jsonData);
+        //console.log(jsonData);
         // Artikel Marker erzeugen
         for (let article of jsonData.geonames) {
             //habe ich den Artikel schon gezeichnet?
             if (articleDrawn[article.wikipediaUrl]) {
                 //ja, nicht noch einmal zeichnen
-                console.log("Schon gesehen", article.wikipediaUrl);
+                //console.log("Schon gesehen", article.wikipediaUrl);
                 continue;
             } else {
                 articleDrawn[article.wikipediaUrl] = true;
@@ -184,6 +184,24 @@ const drawTrack = (nr) => {
 const selectedTrack = 19;
 drawTrack(selectedTrack);
 
+const updateTexts = (nr) => {
+    console.log(nr);
+    for (let etappe of BIKETIROL) {
+        //console.log(etappe);
+        //ist es die aktuelle Etappe?
+        if (etappe == nr) {
+            //console.log("unsere Etappe", etappe);
+            for (let key in etappe) {
+                console.log("key:", key, " value:", etappe[key]);
+                //gibt es ein Element in HTML 
+                if (document.querySelector(`#${key}`)) {
+                    console.log("Juhu", key, etappe[key]);
+                }
+            }
+        }
+    }
+};
+
 //console.log('biketirol json: ', BIKETIROL);
 
 let pulldown = document.querySelector("#pulldown");
@@ -197,12 +215,16 @@ for (let track of BIKETIROL) {
     }   
     pulldown.innerHTML += `<option ${selected} value="${track.nr}">${track.nr}: ${track.etappe}</option>`;
 }
+updateTexts(pulldown.value);
 //Eventhandler fuer Aenderung des Dropdown
 pulldown.onchange = () => {
     //console.log('changed!!!!!', pulldown.value); // schreibt Wert der Änderung in Console
     drawTrack(pulldown.value);
-}
+    // Metadaten der Etappe updaten
+    updateTexts(pulldown.value);
+};
 
+// Metadaten
 
 map.on("zoomend moveend", () => {
     //Wikipedia Artikel zeichnen
