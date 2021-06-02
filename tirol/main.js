@@ -48,7 +48,7 @@ let articleDrawn = {};
 const drawWikipedia = (bounds) => {
     //console.log(bounds);
     let url = `https://secure.geonames.org/wikipediaBoundingBoxJSON?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}&username=rafaelibk&lang=de&maxRows=30`;
-    console.log(url);
+    //console.log(url);
 
     let icons = {
         adm1st: "wikipedia_administration.png",
@@ -156,7 +156,7 @@ const drawTrack = (nr) => {
     }
     }).addTo(overlays.tracks);
     gpxTrack.on("loaded", () => {
-        console.log('loaded.gpx');
+        //console.log('loaded.gpx');
         map.fitBounds(gpxTrack.getBounds());
         gpxTrack.bindPopup(`
         <h3>${gpxTrack.get_name(gpxTrack)}</h3>
@@ -185,7 +185,7 @@ const selectedTrack = 19;
 drawTrack(selectedTrack);
 
 const updateTexts = (nr) => {
-    console.log(nr);
+    //console.log(nr);
     for (let etappe of BIKETIROL) {
         //console.log(etappe);
         // ist es die aktuelle Etappe?
