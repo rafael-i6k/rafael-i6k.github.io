@@ -21,3 +21,17 @@ let map = L.map("map", {
     ]
 });
 
+
+// Kartenhintergründe und Overlays zur Layer-Control hinzufügen
+let layerControl = L.control.layers({
+    "basemap.at Standard": baselayers.standard,
+    "basemap.at grau": baselayers.grau,
+    "basemap.at Relief": baselayers.terrain,
+    "basemap.at Oberfläche": baselayers.surface,
+    "basemap.at hochauflösend": baselayers.highdpi,
+    "basemap.at Orthofoto beschriftet": baselayers.ortho_overlay
+}, {
+    collapsed: false,
+}).addTo(map);
+
+
