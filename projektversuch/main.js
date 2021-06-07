@@ -49,6 +49,13 @@ let awsUrl ='https://www.ages.at/typo3temp/badegewaesser_db.json';
 fetch(awsUrl)
     .then(response => response.json())
     .then(json => {
+        console.log('Daten konvertiert: ', json);
+    });
+
+/*
+fetch(awsUrl)
+    .then(response => response.json())
+    .then(json => {
         //  console.log('Daten konvertiert: ', json);
         for (station of json.features) {
             //console.log('Station: ', station);
@@ -62,3 +69,5 @@ fetch(awsUrl)
             <h3>${station.BUNDESLAENDER.BADEGEWAESSER.BADEGEWAESSERNAME}</h3>`);marker.addTo(overlays.stations);
 
         }});
+
+*/
