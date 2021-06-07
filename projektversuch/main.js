@@ -45,7 +45,11 @@ let layerScale = L.control.scale({
 
 let awsUrl ='https://www.ages.at/typo3temp/badegewaesser_db.json';
 
+var theReferrer = awsUrl.referrerPolicy;
+console.log("test");
+console.log(theReferrer);
 
+/*
 fetch(awsUrl)
     .then(response => response.json())
     .then(json => {
