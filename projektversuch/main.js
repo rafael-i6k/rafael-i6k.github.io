@@ -11,6 +11,10 @@ let baselayers = {
     ]),
 };
 
+let overlays = {
+    stations: L.featureGroup(),
+};
+
 // Karte initialisieren und auf Wiens Wikipedia Koordinate blicken
 let map = L.map("map", {
     fullscreenControl: true,
@@ -30,8 +34,15 @@ let layerControl = L.control.layers({
     "basemap.at Oberfläche": baselayers.surface,
     "basemap.at hochauflösend": baselayers.highdpi,
     "basemap.at Orthofoto beschriftet": baselayers.ortho_overlay
-}, {
-    collapsed: false,
 }).addTo(map);
+
+let layerScale = L.control.scale({
+    maxwidth: 800,
+    metric: true,
+    imperial: false,
+}).addTo(map);
+
+
+let awsUrl ='https://www.ages.at/typo3temp/badegewaesser_db.json';
 
 
